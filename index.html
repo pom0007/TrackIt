@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FMS Asset Scanner</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>FMS</h2>
+        </div>
+
+        <nav>
+            <button class="nav-btn active">
+                <i class="fa-solid fa-house"></i>
+            </button>
+
+            <button class="nav-btn">
+                <i class="fa-solid fa-chart-column"></i>
+            </button>
+
+            <button class="nav-btn">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </button>
+
+            <button class="nav-btn">
+                <i class="fa-regular fa-user"></i>
+            </button>
+
+            <button class="nav-btn">
+                <i class="fa-solid fa-box"></i>
+            </button>
+
+            <button class="nav-btn">
+                <i class="fa-regular fa-clock"></i>
+            </button>
+        </nav>
+
+        <div class="bottom-icons">
+            <button class="nav-btn">
+                <i class="fa-regular fa-user"></i>
+            </button>
+
+            <button class="nav-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+
+        <!-- Scanner Panel -->
+        <section class="scanner-card">
+
+            <h3>Scan Asset Barcode</h3>
+
+            <div class="scanner-box">
+                <div class="scan-frame">
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+.scanner{
+    width:260px;
+    height:260px;
+    margin:auto;
+    position:relative;
+}
+            <p>
+                Search for asset information by
+                scanning the barcode.
+            </p>
+
+            <input
+                type="text"
+                id="barcodeInput"
+                placeholder="Enter barcode..."
+            >
+
+            <button id="scanBtn">
+                Scan Barcode
+            </button>
+
+        </section>
+
+        <!-- Asset Information -->
+        <section class="asset-card">
+
+            <h3>Asset Information</h3>
+
+            <div id="emptyState" class="empty-state">
+                <i class="fa-regular fa-file-lines"></i>
+                <h2>No Asset Information displayed</h2>
+                <p>
+                    Scan an asset barcode to view
+                    its information and details.
+                </p>
+            </div>
+
+            <div id="assetInfo" class="asset-info hidden">
+
+                <h2>Asset Details</h2>
+
+                <div class="info-grid">
+                    <div>
+                        <label>Asset ID</label>
+                        <span id="assetId"></span>
+                    </div>
+
+                    <div>
+                        <label>Name</label>
+                        <span id="assetName"></span>
+                    </div>
+
+                    <div>
+                        <label>Location</label>
+                        <span id="assetLocation"></span>
+                    </div>
+
+                    <div>
+                        <label>Status</label>
+                        <span id="assetStatus"></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

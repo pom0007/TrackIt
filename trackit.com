@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TRACK IT</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#f4f5f7;
+height:100vh;
+overflow:hidden;
+}
+/* =========================
+   PROPERTIES PAGE
+========================= */
+
+.asset-card{
+    flex:1;
+    background:#fff;
+    border-radius:20px;
+    padding:0;
+    overflow:hidden;
+    box-shadow:
+    0 0 1px rgba(0,0,0,.05),
+    0 8px 30px rgba(0,0,0,.04);
+}
+
+.properties-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 30px;
+    border-bottom:1px solid #EAECF0;
+}
+
+.properties-header h1{
+    font-size:20px;
+    font-weight:700;
+    color:#101828;
+    margin-bottom:10px;
+}
+
+.properties-header p{
+    color:#667085;
+    font-size:15px;
+}
+
+.add-property-btn{
+    height:40px;
+    border:none;
+    padding:0 22px;
+    border-radius:10px;
+    background:#16A34A;
+    color:white;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.add-property-btn:hover{
+    background:#15803D;
+}
+
+.search-container{
+    padding:25px 40px 10px;
+}
+
+.search-box{
+    width:380px;
+    height:46px;
+    border:1px solid #D0D5DD;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    padding:0 16px;
+    gap:12px;
+}
+
+.search-box i{
+    color:#667085;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    height:100%;
+    width:100%;
+    font-size:14px;
+}
+
+.table-container{
+    margin:18px 40px 30px;
+    border:1px solid #EAECF0;
+    border-radius:14px;
+    overflow:auto;
+}
+
+.property-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.property-table th{
+    height:60px;
+    text-align:left;
+    padding:0 30px;
+    background:#FCFCFD;
+    color:#101828;
+    font-size:15px;
+    font-weight:700;
+    border-bottom:1px solid #EAECF0;
+}
+
+.property-table td{
+    padding:0;
+}
+
+.empty-state-table{
+    height:calc(100vh - 380px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.empty-state-table .empty-icon{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:#F5F7FF;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+.empty-state-table .empty-icon i{
+    font-size:58px;
+    color:#16A34A;
+}
+
+.empty-state-table h2{
+    font-size:20px;
+    font-weight:700;
+    color:#101828;
+    margin-bottom:10px;
+}
+
+.empty-state-table p{
+    color:#667085;
+    font-size:15px;
+}
+
+.pagination{
+    height:60px;
+    border-top:1px solid #EAECF0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+}
+
+.pagination-info{
+    color:#667085;
+    font-size:14px;
+}
+
+.pagination-buttons{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.pagination-buttons button{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:8px;
+    background:#F2F4F7;
+    color:#98A2B3;
+    cursor:pointer;
+}
+
+.pagination-buttons button.active-page{
+    background:#16A34A;
+    color:white;
+    font-weight:600;
+}
+
+.pagination-buttons button:disabled{
+    cursor:not-allowed;
+    opacity:.8;
+}
+/* Layout */
+
+.wrapper{
+display:flex;
+height:100vh;
+padding:14px;
+gap:18px;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:250px;
+background:#fff;
+border-radius:20px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+align-items:left;
+padding:18px 0;
+box-shadow:
+0 0 1px rgba(0,0,0,.05),
+0 8px 30px rgba(0,0,0,.04);
+}
+
+.logo{
+display:flex;
+align-items:left;
+gap:8px;
+margin-top:15px;
+margin-bottom:45px;
+margin-left:10px;
+}
+.logo-text{
+    font-size:24px;
+    font-weight:700;
+    align-items:center;
+    line-height:1;
+    display:flex;
+    position:relative;
+}
+.track{
+    color:#00674b !important;
+    font-size:28px;
+    font-weight:800;
+}
+
+.dotcom{
+    color:#9CA3AF !important;
+    font-size:18px;
+    font-weight:400;
+}
+
+.logo-circle{
+width:58px;
+height:58px;
+border-radius:50%;
+background:#eef4ff;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#2457ff;
+font-size:28px;
+}
+
+.logo h1{
+font-size:18px;
+font-weight:800;
+color:#2457ff;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:8px;
+padding:0 12px;
+}
+
+.menu button{
+    width:100%;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+
+    gap:10px;
+
+    padding:0 15px;
+
+    border:none;
+    border-radius:10px;
+    background:transparent;
+
+    cursor:pointer;
+
+    font-size:14px;
+    color:#374151;
+}
+
+.menu button i{
+width:20px;
+min-width:20px;
+font-size:18px;
+text-align:center;
+}
+
+.menu button:hover{
+background:#f2f6ff;
+}
+
+.menu button.active{
+background:#DCFCE7;
+color:#16A34A;
+}
+
+.bottom{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:auto;
+
+    padding:0 12px 30px 12px;
+}
+.bottom button{
+    width:100%;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+
+    gap:10px;
+    padding:0 15px;
+
+    border:none;
+    background:transparent;
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:14px;
+    color:#374151;
+}
+.bottom button i{
+width:20px;
+min-width:20px;
+font-size:18px;
+text-align:center;
+}
+.bottom button:hover{
+    background:#f2f4f7;
+    
+}
+
+/* Main */
+
+.main{
+display:flex;
+flex:1;
+gap:18px;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+<div class="sidebar">
+<div class="logo">
+
+    <img src="images/logomoto.png"
+     width="70"
+     height="70">
+
+    <div class="logo-divider"></div>
+
+    <div class="logo-text">
+    <span class="track">TrackIt</span>
+    <span class="dotcom">.com</span>
+</div>
+
+
+</div>
+
+<div class="menu">
+<button onclick="window.location.href='displaypanel.html'">
+    <i class="fa-solid fa-house"></i>
+    <span>Track</span>
+</button>
+
+<button class="active">
+    <i class="fa-solid fa-chart-column"></i>
+    <span>Properties</span>
+</button>
+
+<button onclick="window.location.href='cleaning.html'">
+    <i class="fa-solid fa-screwdriver-wrench"></i>
+<span>Cleaning</span>
+</button>
+
+<button onclick="window.location.href='accounts.html'">
+    <i class="fa-regular fa-user"></i>
+<span>Accounts</span>
+</button>
+
+<button onclick="window.location.href='garagesale.html'">
+    <i class="fa-solid fa-box"></i>
+<span>Garage Sale</span>
+</button>
+
+<button onclick="window.location.href='logs.html'">
+    <i class="fa-regular fa-clock"></i>
+<span>Logs</span>
+</button>
+</div>
+
+<div class="bottom">
+
+    <button>
+        <i class="fa-regular fa-circle-user"></i>
+        <span>Profile</span>
+    </button>
+
+    <button>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </button>
+
+</div>
+
+</div>
+
+<div class="main">
+
+
+    <div class="asset-card">
+
+        <!-- Header -->
+        <div class="properties-header">
+
+            <div>
+                <h1>Properties</h1>
+                <p>Manage all registered properties.</p>
+            </div>
+
+            <button class="add-property-btn">
+                <i class="fa-solid fa-plus"></i>
+                Add Property
+            </button>
+
+        </div>
+
+        <!-- Search -->
+        <div class="search-container">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search property...">
+            </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+
+            <table class="property-table">
+
+                <thead>
+                    <tr>
+                        <th>Tracking No.</th>
+                        <th>Property Name</th>
+                        <th>Date Registered</th>
+                        <th>Age</th>
+                        <th>Assignee</th>
+                        <th>Maintenance Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td colspan="7">
+
+                            <div class="empty-state-table">
+
+                                <div class="empty-icon">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+
+                                <h2>No Property Information</h2>
+
+                                <p>
+                                    Property records will be displayed here.
+                                </p>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 0 to 0 of 0 entries
+                </div>
+
+                <div class="pagination-buttons">
+
+                    <button disabled>
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button class="active-page">
+                        1
+                    </button>
+
+                    <button disabled>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+</body>
+</html>
