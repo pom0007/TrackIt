@@ -428,6 +428,192 @@ font-size:18px;
 font-weight:700;
 color:#101828;
 }
+/*ACCOUNTS*/
+/* =========================
+   PROPERTIES PAGE
+========================= */
+
+.asset-card{
+    flex:1;
+    background:#fff;
+    border-radius:20px;
+    padding:0;
+    overflow:hidden;
+    box-shadow:
+    0 0 1px rgba(0,0,0,.05),
+    0 8px 30px rgba(0,0,0,.04);
+}
+
+.properties-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 30px;
+    border-bottom:1px solid #EAECF0;
+}
+
+.properties-header h1{
+    font-size:20px;
+    font-weight:700;
+    color:#101828;
+    margin-bottom:10px;
+}
+
+.properties-header p{
+    color:#667085;
+    font-size:15px;
+}
+
+.add-property-btn{
+    height:40px;
+    border:none;
+    padding:0 22px;
+    border-radius:10px;
+    background:#16A34A;
+    color:white;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.add-property-btn:hover{
+    background:#15803D;
+}
+
+.search-container{
+    padding:25px 40px 10px;
+}
+
+.search-box{
+    width:380px;
+    height:46px;
+    border:1px solid #D0D5DD;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    padding:0 16px;
+    gap:12px;
+}
+
+.search-box i{
+    color:#667085;
+    font-size:18px;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    height:100%;
+    width:100%;
+    font-size:14px;
+}
+
+.table-container{
+    margin:18px 40px 30px;
+    border:1px solid #EAECF0;
+    border-radius:14px;
+    overflow:auto;
+}
+
+.property-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.property-table th{
+    height:60px;
+    text-align:left;
+    padding:0 30px;
+    background:#FCFCFD;
+    color:#101828;
+    font-size:15px;
+    font-weight:700;
+    border-bottom:1px solid #EAECF0;
+}
+
+.property-table td{
+    padding:0;
+}
+
+.empty-state-table{
+    height:calc(100vh - 380px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.empty-state-table .empty-icon{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:#F5F7FF;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+.empty-state-table .empty-icon i{
+    font-size:58px;
+    color:#16A34A;
+}
+
+.empty-state-table h2{
+    font-size:20px;
+    font-weight:700;
+    color:#101828;
+    margin-bottom:10px;
+}
+
+.empty-state-table p{
+    color:#667085;
+    font-size:15px;
+}
+
+.pagination{
+    height:60px;
+    border-top:1px solid #EAECF0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+}
+
+.pagination-info{
+    color:#667085;
+    font-size:14px;
+}
+
+.pagination-buttons{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.pagination-buttons button{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:8px;
+    background:#F2F4F7;
+    color:#98A2B3;
+    cursor:pointer;
+}
+
+.pagination-buttons button.active-page{
+    background:#16A34A;
+    color:white;
+    font-weight:600;
+}
+
+.pagination-buttons button:disabled{
+    cursor:not-allowed;
+    opacity:.8;
+}
 
 </style>
 </head>
@@ -502,36 +688,99 @@ color:#101828;
 
 <div class="main">
 
+
     <div class="asset-card">
 
-        <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        margin-bottom:25px;
-        ">
+        <!-- Header -->
+        <div class="properties-header">
 
-            <div class="section-title" style="margin-bottom:0;">
-                Accounts
+            <div>
+                <h1>Accounts</h1>
+                <p>Manage all user accounts.</p>
             </div>
 
-            
+            <button class="add-property-btn">
+                <i class="fa-solid fa-plus"></i>
+                Add User
+            </button>
 
         </div>
 
-        <div class="empty-state">
+        <!-- Search -->
+        <div class="search-container">
 
-            <div class="empty-icon">
-                <i class="fa-solid fa-building"></i>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search user...">
             </div>
 
-            <h2>
-                No Account Information
-            </h2>
+        </div>
 
-            <p>
-                Account records will be displayed here.
-            </p>
+        <!-- Table -->
+        <div class="table-container">
+
+            <table class="property-table">
+
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Designation</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td colspan="7">
+
+                            <div class="empty-state-table">
+
+                                <div class="empty-icon">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+
+                                <h2>No user Information</h2>
+
+                                <p>
+                                    User records will be displayed here.
+                                </p>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 0 to 0 of 0 entries
+                </div>
+
+                <div class="pagination-buttons">
+
+                    <button disabled>
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button class="active-page">
+                        1
+                    </button>
+
+                    <button disabled>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
