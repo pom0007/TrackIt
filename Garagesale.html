@@ -539,7 +539,7 @@ color:#101828;
 }
 
 .empty-state-table{
-    height:calc(100vh - 380px);
+    height:calc(95vh - 380px);
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -613,6 +613,30 @@ color:#101828;
 .pagination-buttons button:disabled{
     cursor:not-allowed;
     opacity:.8;
+}
+/* =========================
+   TOTAL AMOUNT*/
+.total-amount-bar{
+    height:60px;
+    border-top:1px solid #EAECF0;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:10px;
+    padding:0 25px;
+    background:#FCFCFD;
+}
+
+.total-amount-bar span{
+    font-size:14px;
+    color:#667085;
+    font-weight:500;
+}
+
+.total-amount-bar strong{
+    font-size:20px;
+    color:#16A34A;
+    font-weight:600;
 }
 
 </style>
@@ -719,6 +743,7 @@ color:#101828;
                         <th>Property</th>
                         <th>Date Registered</th>
                         <th>Age</th>
+                        <th>Amount</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -748,6 +773,10 @@ color:#101828;
                 </tbody>
 
             </table>
+            <div class="total-amount-bar">
+    <span>Total Amount:</span>
+    <strong>₱0.00</strong>
+</div>
 
             <!-- Pagination -->
 
@@ -756,6 +785,7 @@ color:#101828;
                 <div class="pagination-info">
                     Showing 0 to 0 of 0 entries
                 </div>
+                
 
                 <div class="pagination-buttons">
 
