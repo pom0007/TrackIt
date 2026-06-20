@@ -2,13 +2,16 @@
 
 @section('content')
 <style>
-    .properties-header {
+
+
+        .properties-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 30px;
             border-bottom: 1px solid #EAECF0;
         }
+
         .properties-header h1 {
             font-size: 20px;
             font-weight: 700;
@@ -20,6 +23,7 @@
             color: #667085;
             font-size: 15px;
         }
+
         .add-property-btn {
             height: 40px;
             border: none;
@@ -58,6 +62,7 @@
             color: #667085;
             font-size: 18px;
         }
+
         .search-box input {
             border: none;
             outline: none;
@@ -127,7 +132,6 @@
             color: #667085;
             font-size: 15px;
         }
-        
 
         .pagination {
             height: 60px;
@@ -145,7 +149,6 @@
 
         .pagination-buttons {
             display: flex;
-            align-items: center;
             gap: 10px;
         }
 
@@ -155,21 +158,22 @@
             border: none;
             border-radius: 8px;
             background: #F2F4F7;
-            color: #98A2B3;
             cursor: pointer;
         }
 
+        .active-page {
+            background: #16A34A !important;
+            color: white;
+        }
         .pagination-buttons button.active-page {
             background: #16A34A;
             color: white;
             font-weight: 600;
         }
-
         .pagination-buttons button:disabled {
             cursor: not-allowed;
             opacity: .8;
         }
-/* Modal add property */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -386,10 +390,10 @@
             background: #fff;
             color: #344054;
         }
-    </style>
-<body>
 
-    <div class="wrapper">
+
+</style>
+     <div class="wrapper">
 
         <div class="sidebar">
             <div class="logo">
@@ -407,21 +411,20 @@
             </div>
 
             <div class="menu">
-                <button onclick="window.location.href='/track'">
+                <button onclick="window.location.href='/displaypanel'">
                     <i class="fa-solid fa-house"></i>
                     <span>Track</span>
                 </button>
 
-                <button class="active">
+                <button onclick="window.location.href='/properties'">
                     <i class="fa-solid fa-chart-column"></i>
                     <span>Properties</span>
                 </button>
 
-                <button onclick="window.location.href='/cleaning'">
+                <button class="active">
                     <i class="fa-solid fa-screwdriver-wrench"></i>
                     <span>Cleaning</span>
                 </button>
-
                 <button onclick="window.location.href='/accounts'">
                     <i class="fa-regular fa-user"></i>
                     <span>Accounts</span>
@@ -456,20 +459,19 @@
 
         <div class="main">
 
-
             <div class="asset-card">
 
                 <!-- Header -->
                 <div class="properties-header">
 
                     <div>
-                        <h1>Properties</h1>
-                        <p>Manage all registered properties.</p>
+                        <h1>Cleaning</h1>
+                        <p>Manage all cleaning records.</p>
                     </div>
 
-                    <button id="addPropertyBtn" class="add-property-btn">
+                    <button class="add-property-btn">
                         <i class="fa-solid fa-plus"></i>
-                        Add Property
+                        Add Cleaning Record
                     </button>
 
                 </div>
@@ -477,42 +479,12 @@
                 <!-- Search -->
                 <div class="search-container">
 
-                    <div class="toolbar">
-
-                        <div class="search-box">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Search property...">
-                        </div>
-
-                        <div class="toolbar-actions">
-
-                            <button id="importBtn" class="toolbar-btn">
-                                <i class="fa-solid fa-upload"></i>
-                                Import
-                            </button>
-
-                            <button id="exportTemplateBtn" class="toolbar-btn">
-                                <i class="fa-solid fa-download"></i>
-                                Export Template
-                            </button>
-
-                            <button id="filterBtn" class="toolbar-btn">
-                                <i class="fa-solid fa-filter"></i>
-                                Filter
-                            </button>
-
-                            <button id="generateBarcodeBtn" class="toolbar-btn">
-                                <i class="fa-solid fa-barcode"></i>
-                                Generate Barcode
-                            </button>
-
-                        </div>
-
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search cleaning record...">
                     </div>
 
                 </div>
-
-                <input type="file" id="importFile" accept=".csv,.xlsx" hidden>
 
                 <!-- Table -->
                 <div class="table-container">
@@ -523,11 +495,10 @@
                             <tr>
                                 <th>Tracking No.</th>
                                 <th>Property Name</th>
-                                <th>Category</th>
-                                <th>Date Registered</th>
-                                <th>Age</th>
-                                <th>Assignee</th>
-                                <th>Maintenance Date</th>
+                                <th>Cleaning Date</th>
+                                <th>Cleaning Officer</th>
+                                <th>Remarks</th>
+                                <th>Next Schedule</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -540,13 +511,13 @@
                                     <div class="empty-state-table">
 
                                         <div class="empty-icon">
-                                            <i class="fa-solid fa-building"></i>
+                                            <i class="fa-solid fa-screwdriver-wrench"></i>
                                         </div>
 
-                                        <h2>No Property Information</h2>
+                                        <h2>No Cleaning Information</h2>
 
                                         <p>
-                                            Property records will be displayed here.
+                                            Cleaning records will be displayed here.
                                         </p>
 
                                     </div>
@@ -559,7 +530,6 @@
                     </table>
 
                     <!-- Pagination -->
-
                     <div class="pagination">
 
                         <div class="pagination-info">
@@ -587,323 +557,5 @@
                 </div>
 
             </div>
-            <div id="propertyModal" class="modal-overlay">
 
-                <div class="modal">
-
-                    <div class="modal-header">
-                        <h2>Add New Property</h2>
-
-                        <button id="closeModalBtn" class="close-btn">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <!-- LEFT SIDE -->
-                        <div class="upload-box">
-
-                            <div class="upload-content">
-
-                                <div class="upload-icon">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                                </div>
-
-                                <h3>Upload Property Image</h3>
-
-                                <p>PNG, JPG up to 5MB</p>
-
-                                <label class="upload-btn">
-                                    Choose File
-                                    <input type="file" id="propertyImage" accept="image/*" hidden>
-                                </label>
-
-                            </div>
-
-                            <img id="previewImage">
-
-                        </div>
-
-                        <!-- RIGHT SIDE -->
-                        <div class="form-section">
-
-                            <div class="form-group">
-                                <label>Property Name *</label>
-                                <input type="text" id="propertyName">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Color *</label>
-                                <input type="text" id="propertyColor">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Brand *</label>
-                                <input type="text" id="propertyBrand">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Registration Date *</label>
-                                <input type="date" id="registrationDate">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Assignee *</label>
-                                <input type="text" id="assignee">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Maintenance Date *</label>
-                                <input type="date" id="maintenanceDate">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Location *</label>
-                                <input type="text" id="location">
-                            </div>
-
-                        </div>
-
-                        <!-- FULL WIDTH -->
-                        <div class="description-group">
-                            <label>Description</label>
-                            <textarea id="description"></textarea>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-
-                        <button id="cancelBtn" class="cancel-btn">
-                            Cancel
-                        </button>
-
-                        <button id="saveBtn" class="save-btn">
-                            Save Property
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div id="barcodeModal" class="modal-overlay">
-
-        <div class="modal" style="width:500px;">
-
-            <div class="modal-header">
-                <h2>Generated Barcode</h2>
-
-                <button id="closeBarcodeBtn" class="close-btn">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div style="padding:40px;text-align:center;">
-                <svg id="barcode"></svg>
-            </div>
-
-        </div>
-
-    </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
- <script>const modal =
-            document.getElementById("propertyModal");
-
-        const addBtn =
-            document.getElementById("addPropertyBtn");
-
-        const closeBtn =
-            document.getElementById("closeModalBtn");
-
-        const cancelBtn =
-            document.getElementById("cancelBtn");
-
-        const saveBtn =
-            document.getElementById("saveBtn");
-
-        /* Open Modal */
-        addBtn.addEventListener("click", () => {
-            modal.classList.add("show");
-        });
-
-        /* Close Modal */
-        closeBtn.addEventListener("click", closeModal);
-        cancelBtn.addEventListener("click", closeModal);
-
-        function closeModal() {
-            modal.classList.remove("show");
-        }
-
-        /* Close when clicking outside */
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        /* Image Preview */
-        document
-            .getElementById("propertyImage")
-            .addEventListener("change", function () {
-
-                const file = this.files[0];
-
-                if (!file) return;
-
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    const preview =
-                        document.getElementById("previewImage");
-
-                    preview.src = e.target.result;
-                    preview.style.display = "block";
-
-                    document.querySelector(".upload-content")
-                        .style.display = "none";
-                };
-
-                reader.readAsDataURL(file);
-            });
-
-
-        /* Save Property */
-        saveBtn.addEventListener("click", () => {
-
-            const property = {
-
-                image:
-                    document.getElementById("propertyImage").files[0]?.name,
-
-                name:
-                    document.getElementById("propertyName").value,
-
-                color:
-                    document.getElementById("propertyColor").value,
-
-                brand:
-                    document.getElementById("propertyBrand").value,
-
-                registrationDate:
-                    document.getElementById("registrationDate").value,
-
-                assignee:
-                    document.getElementById("assignee").value,
-
-                maintenanceDate:
-                    document.getElementById("maintenanceDate").value,
-
-                location:
-                    document.getElementById("location").value,
-
-                description:
-                    document.getElementById("description").value
-            };
-
-            console.log(property);
-
-            alert("Property saved successfully!");
-
-            closeModal();
-        });
-
-        /* IMPORT */
-
-        const importBtn =
-            document.getElementById("importBtn");
-
-        const importFile =
-            document.getElementById("importFile");
-
-        importBtn.addEventListener("click", () => {
-            importFile.click();
-        });
-
-        importFile.addEventListener("change", (e) => {
-
-            const file = e.target.files[0];
-
-            if (file) {
-                alert("Imported: " + file.name);
-            }
-
-        });
-
-        /* EXPORT TEMPLATE */
-
-        document
-            .getElementById("exportTemplateBtn")
-            .addEventListener("click", () => {
-
-                const csv =
-                    `Property Name,Color,Brand,Registration Date,Assignee,Maintenance Date,Location,Description`;
-
-                const blob =
-                    new Blob([csv], { type: 'text/csv' });
-
-                const url =
-                    URL.createObjectURL(blob);
-
-                const a =
-                    document.createElement("a");
-
-                a.href = url;
-                a.download = "property_template.csv";
-                a.click();
-
-            });
-
-        /* FILTER */
-
-        document
-            .getElementById("filterBtn")
-            .addEventListener("click", () => {
-
-                alert("Open Filter Modal");
-
-            });
-
-        /* GENERATE BARCODE */
-
-        const barcodeModal =
-            document.getElementById("barcodeModal");
-
-        document
-            .getElementById("generateBarcodeBtn")
-            .addEventListener("click", () => {
-
-                const trackingNo =
-                    "TRK-" +
-                    Math.floor(
-                        100000 + Math.random() * 900000
-                    );
-
-                JsBarcode(
-                    "#barcode",
-                    trackingNo,
-                    {
-                        format: "CODE128",
-                        width: 2,
-                        height: 80,
-                        displayValue: true
-                    }
-                );
-
-                barcodeModal.classList.add("show");
-
-            });
-
-        document
-            .getElementById("closeBarcodeBtn")
-            .addEventListener("click", () => {
-
-                barcodeModal.classList.remove("show");
-
-            });
-    </script>
 @endsection
