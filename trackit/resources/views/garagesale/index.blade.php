@@ -2,7 +2,6 @@
 
 @section('content')
 <style>
-
 .properties-header{
     display:flex;
     justify-content:space-between;
@@ -98,7 +97,7 @@
 }
 
 .empty-state-table{
-    height:calc(100vh - 380px);
+    height:calc(95vh - 380px);
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -173,6 +172,30 @@
     cursor:not-allowed;
     opacity:.8;
 }
+/* =========================
+   TOTAL AMOUNT*/
+.total-amount-bar{
+    height:60px;
+    border-top:1px solid #EAECF0;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:10px;
+    padding:0 25px;
+    background:#FCFCFD;
+}
+
+.total-amount-bar span{
+    font-size:14px;
+    color:#667085;
+    font-weight:500;
+}
+
+.total-amount-bar strong{
+    font-size:20px;
+    color:#16A34A;
+    font-weight:600;
+}
 
 </style>
 
@@ -181,9 +204,7 @@
 <div class="sidebar">
 <div class="logo">
 
-    <img src="images/TI.png"
-     width="70"
-     height="70">
+    <img src="{{ asset('images/TI.png') }}" width="70" height="70">
 
     <div class="logo-divider"></div>
 
@@ -210,13 +231,12 @@
     <i class="fa-solid fa-screwdriver-wrench"></i>
 <span>Cleaning</span>
 </button>
-
-<button class="active">
+<button onclick="window.location.href='/accounts'">
     <i class="fa-regular fa-user"></i>
 <span>Accounts</span>
 </button>
 
-<button onclick="window.location.href='/garagesale'">
+<button class="active">
     <i class="fa-solid fa-box"></i>
 <span>Garage Sale</span>
 </button>
@@ -244,22 +264,15 @@
 </div>
 
 <div class="main">
-
-
     <div class="asset-card">
 
         <!-- Header -->
         <div class="properties-header">
 
             <div>
-                <h1>Accounts</h1>
-                <p>Manage all user accounts.</p>
+                <h1>Garage Sale</h1>
+                <p>Manage all items on the garage.</p>
             </div>
-
-            <button class="add-property-btn">
-                <i class="fa-solid fa-plus"></i>
-                Add User
-            </button>
 
         </div>
 
@@ -268,7 +281,7 @@
 
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search user...">
+                <input type="text" placeholder="Search property...">
             </div>
 
         </div>
@@ -280,9 +293,11 @@
 
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Full Name</th>
-                        <th>Designation</th>
+                        <th>Tracking No.</th>
+                        <th>Property</th>
+                        <th>Date Registered</th>
+                        <th>Age</th>
+                        <th>Amount</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -298,10 +313,10 @@
                                     <i class="fa-solid fa-building"></i>
                                 </div>
 
-                                <h2>No user Information</h2>
+                                <h2>No Property Information</h2>
 
                                 <p>
-                                    User records will be displayed here.
+                                    Property records will be displayed here.
                                 </p>
 
                             </div>
@@ -312,6 +327,10 @@
                 </tbody>
 
             </table>
+            <div class="total-amount-bar">
+    <span>Total Amount:</span>
+    <strong>₱0.00</strong>
+</div>
 
             <!-- Pagination -->
 
@@ -320,6 +339,7 @@
                 <div class="pagination-info">
                     Showing 0 to 0 of 0 entries
                 </div>
+                
 
                 <div class="pagination-buttons">
 
@@ -342,6 +362,7 @@
         </div>
 
     </div>
+
 
 </div>
 @endsection

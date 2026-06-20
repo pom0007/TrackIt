@@ -26,5 +26,5 @@ Route::get('/garagesale', function () {
 });
 
 Route::get('/logs', function () {
-    return view('logs');
+    return view('logs.index');
 });

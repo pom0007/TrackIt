@@ -411,7 +411,7 @@
             </div>
 
             <div class="menu">
-                <button onclick="window.location.href='/displaypanel'">
+                <button onclick="window.location.href='/track'">
                     <i class="fa-solid fa-house"></i>
                     <span>Track</span>
                 </button>
