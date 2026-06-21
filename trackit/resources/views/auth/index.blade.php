@@ -289,6 +289,36 @@
 
     cursor:pointer;
 }
+/* LOGIN SUCCESS TOAST */
+
+.login-toast{
+    position:fixed;
+    top:30px;
+    right:30px;
+
+    width:580px;
+    max-width:90vw;
+
+    background:#fff;
+    border-radius:24px;
+
+    padding:28px;
+
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.12);
+
+    z-index:99999;
+
+    transform:translateX(700px);
+    opacity:0;
+
+    transition:.5s ease;
+}
+
 </style>
 <div class="login-page">
 
@@ -376,9 +406,12 @@
 
                     </div>
 
-                    <button class="login-btn">
-                        Sign In
-                    </button>
+                    <button
+    type="button"
+    class="login-btn"
+    onclick="window.location.href='/track?login=success'">
+    Sign In
+</button>
 
                 </form>
 
@@ -419,8 +452,9 @@
             OK
         </button>
 
-    </div>
 
+
+</div>
 </div>
 <script>
 
@@ -447,6 +481,7 @@ window.onload = function(){
                 .style.display='flex';
     }
 }
+
 
 </script>
 @endsection

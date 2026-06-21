@@ -442,6 +442,116 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         transform:translateY(-6px);
     }
 }
+.login-toast{
+    position:fixed;
+    top:15px;
+    right:15px;
+
+    width:400px;
+    padding:16px 19px;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:#fff;
+    border-radius:14px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.10);
+
+    z-index:999999;
+
+    transform:translateX(350px);
+    opacity:0;
+
+    transition:.4s ease;
+}
+
+.login-toast.show{
+    transform:translateX(0);
+    opacity:1;
+}
+
+.toast-icon{
+    width:50px;
+    height:50px;
+    min-width:50px;
+
+    border-radius:50%;
+    background:#ECFDF3;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.toast-icon i{
+    font-size:25px;
+    color:#16A34A;
+}
+
+.toast-content{
+    flex:1;
+}
+
+.toast-content h4{
+    font-size:21px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:2px;
+}
+
+.toast-content p{
+    font-size:15px;
+    color:#6B7280;
+}
+
+.toast-progress{
+    margin-top:12px;
+    width:100%;
+    height:6px;
+}
+
+.toast-progress-bar{
+    width:100%;
+    height:100%;
+    background:#16A34A;
+
+    animation:toastTimer 3s linear forwards;
+}
+
+@keyframes toastTimer{
+    from{
+        width:100%;
+    }
+    to{
+        width:0%;
+    }
+}
+.toast-close{
+    border:none;
+    outline:none;
+    background:transparent;
+
+    cursor:pointer;
+
+    color:#9CA3AF;
+    font-size:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:24px;
+    height:24px;
+
+    transition:.2s ease;
+}
+
+.toast-close:hover{
+    color:#374151;
+    transform:scale(1.1);
+}
 
 </style>
 
@@ -574,6 +684,38 @@ function showLoadingModal(){
 
     }, 2000);
 }
+function hideLoginToast(){
+    document
+        .getElementById('loginToast')
+        .classList.remove('show');
+}
+window.addEventListener('load', () => {
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    if(params.get('login') === 'success'){
+
+        const toast =
+            document.getElementById('loginToast');
+
+        toast.classList.add('show');
+
+        setTimeout(() => {
+
+            toast.classList.remove('show');
+
+            window.history.replaceState(
+                {},
+                document.title,
+                window.location.pathname
+            );
+
+        },3000);
+    }
+
+});
+
 
 </script>
 
@@ -655,5 +797,26 @@ function showLoadingModal(){
       style="display:none;">
     @csrf
 </form>
+<div id="loginToast" class="login-toast">
+
+    <div class="toast-icon">
+        <i class="fa-solid fa-check"></i>
+    </div>
+
+    <div class="toast-content">
+        <h4>Login Successful</h4>
+        <p>Welcome back to TrackIt!</p>
+
+        <div class="toast-progress">
+            <div class="toast-progress-bar"></div>
+        </div>
+    </div>
+
+    <button class="toast-close"
+            onclick="hideLoginToast()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+</div>
 </body>
 </html>
