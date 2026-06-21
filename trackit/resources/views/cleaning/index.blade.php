@@ -393,69 +393,6 @@
 
 
 </style>
-     <div class="wrapper">
-
-        <div class="sidebar">
-            <div class="logo">
-
-                <img src="{{ asset('images/TI.png') }}" width="70" height="70">
-
-                <div class="logo-divider"></div>
-
-                <div class="logo-text">
-                    <span class="track">TrackIt</span>
-                    <span class="dotcom">.com</span>
-                </div>
-
-
-            </div>
-
-            <div class="menu">
-                <button onclick="window.location.href='/track'">
-                    <i class="fa-solid fa-house"></i>
-                    <span>Track</span>
-                </button>
-
-                <button onclick="window.location.href='/properties'">
-                    <i class="fa-solid fa-chart-column"></i>
-                    <span>Properties</span>
-                </button>
-
-                <button class="active">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                    <span>Cleaning</span>
-                </button>
-                <button onclick="window.location.href='/accounts'">
-                    <i class="fa-regular fa-user"></i>
-                    <span>Accounts</span>
-                </button>
-
-                <button onclick="window.location.href='/garagesale'">
-                    <i class="fa-solid fa-box"></i>
-                    <span>Garage Sale</span>
-                </button>
-
-                <button onclick="window.location.href='/logs'">
-                    <i class="fa-regular fa-clock"></i>
-                    <span>Logs</span>
-                </button>
-            </div>
-
-            <div class="bottom">
-
-                <button>
-                    <i class="fa-regular fa-circle-user"></i>
-                    <span>Profile</span>
-                </button>
-
-                <button>
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
-                </button>
-
-            </div>
-
-        </div>
 
         <div class="main">
 

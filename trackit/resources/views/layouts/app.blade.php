@@ -56,18 +56,78 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         /* Sidebar */
 
         .sidebar {
-            width: 250px;
-            background: #fff;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: left;
-            padding: 18px 0;
-            box-shadow:
-                0 0 1px rgba(0, 0, 0, .05),
-                0 8px 30px rgba(0, 0, 0, .04);
-        }
+    width: 250px;
+    transition:all .3s ease;
+    overflow:visible;
+    position:relative;
+    background:#fff;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:18px 0;
+}
+        .sidebar.collapsed{
+    width:80px;
+}
+
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .menu span,
+.sidebar.collapsed .bottom span{
+    display:none;
+}
+
+.sidebar.collapsed .menu button,
+.sidebar.collapsed .bottom button{
+    justify-content:center;
+    padding:0;
+}
+
+.sidebar.collapsed .logo{
+    justify-content:center;
+    margin-left:0;
+}
+
+.sidebar.collapsed .logo img{
+    width:50px;
+    height:50px;
+}
+.collapse-btn{
+    position:absolute;
+
+    top:32px;
+    right:-20px;
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.12);
+
+    z-index:9999;
+
+    transition:.3s ease;
+}
+
+.collapse-btn:hover{
+    transform:scale(1.05);
+}
+
+.collapse-btn i{
+    font-size:14px;
+    color:#374151;
+}
 
         .logo {
             display: flex;
@@ -217,7 +277,113 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </head>
 <body>
 
-@yield('content')
+
+<div class="wrapper">
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+    <img src="{{ asset('images/TI.png') }}" width="70" height="70">
+
+    <div class="logo-text">
+        <span class="track">TrackIt</span>
+        <span class="dotcom">.com</span>
+    </div>
+
+</div>
+
+<button id="toggleSidebar" class="collapse-btn">
+    <i class="fa-solid fa-chevron-left"></i>
+</button>
+        
+
+        <div class="menu">
+
+            <button
+    onclick="window.location.href='/track'"
+    class="{{ request()->is('track') ? 'active' : '' }}">
+    <i class="fa-solid fa-house"></i>
+    <span>Track</span>
+</button>
+
+<button
+    onclick="window.location.href='/properties'"
+    class="{{ request()->is('properties') ? 'active' : '' }}">
+    <i class="fa-solid fa-chart-column"></i>
+    <span>Properties</span>
+</button>
+
+<button
+    onclick="window.location.href='/cleaning'"
+    class="{{ request()->is('cleaning') ? 'active' : '' }}">
+    <i class="fa-solid fa-screwdriver-wrench"></i>
+    <span>Cleaning</span>
+</button>
+
+<button
+    onclick="window.location.href='/accounts'"
+    class="{{ request()->is('accounts') ? 'active' : '' }}">
+    <i class="fa-regular fa-user"></i>
+    <span>Accounts</span>
+</button>
+
+<button
+    onclick="window.location.href='/garagesale'"
+    class="{{ request()->is('garagesale') ? 'active' : '' }}">
+    <i class="fa-solid fa-box"></i>
+    <span>Garage Sale</span>
+</button>
+
+<button
+    onclick="window.location.href='/logs'"
+    class="{{ request()->is('logs') ? 'active' : '' }}">
+    <i class="fa-regular fa-clock"></i>
+    <span>Logs</span>
+</button>
+
+        </div>
+        
+<div class="bottom">
+
+    <button>
+        <i class="fa-regular fa-circle-user"></i>
+        <span>Profile</span>
+    </button>
+
+    <button>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </button>
+
+</div>
+    </div>
+
+    @yield('content')
+
+</div>
+<script>
+
+const sidebar = document.querySelector('.sidebar');
+const toggleBtn = document.getElementById('toggleSidebar');
+
+toggleBtn.addEventListener('click', () => {
+
+    sidebar.classList.toggle('collapsed');
+
+    const icon = toggleBtn.querySelector('i');
+
+    if(sidebar.classList.contains('collapsed')){
+        icon.classList.remove('fa-chevron-left');
+        icon.classList.add('fa-chevron-right');
+    }else{
+        icon.classList.remove('fa-chevron-right');
+        icon.classList.add('fa-chevron-left');
+    }
+
+});
+
+</script>
 
 </body>
 </html>
