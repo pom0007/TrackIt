@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('/track');
+    return redirect('/auth');
 });
 
 Route::get('/track', function () {
@@ -27,4 +27,7 @@ Route::get('/garagesale', function () {
 
 Route::get('/logs', function () {
     return view('logs.index');
+});
+Route::get('/auth', function () {
+    return view('auth.index');
 });
