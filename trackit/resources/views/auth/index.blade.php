@@ -200,6 +200,95 @@
 .login-btn:hover{
     background:#15803D;
 }
+/* LOGOUT SUCCESS MODAL */
+
+.success-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.45);
+    backdrop-filter:blur(6px);
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.success-modal{
+    width:460px;
+    background:#fff;
+    border-radius:24px;
+    padding:35px;
+    text-align:center;
+    position:relative;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.success-close{
+    position:absolute;
+    top:20px;
+    right:20px;
+
+    border:none;
+    background:none;
+
+    font-size:22px;
+    cursor:pointer;
+
+    color:#667085;
+}
+
+.success-icon{
+    width:130px;
+    height:130px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#ECFDF3;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.success-icon i{
+    font-size:60px;
+    color:#16A34A;
+}
+
+.success-modal h2{
+    margin-top:20px;
+    color:#101828;
+    font-size:36px;
+}
+
+.success-modal p{
+    margin-top:10px;
+    color:#667085;
+    font-size:18px;
+}
+
+.ok-btn{
+    width:100%;
+    height:58px;
+
+    margin-top:25px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#16A34A;
+    color:white;
+
+    font-size:18px;
+    font-weight:600;
+
+    cursor:pointer;
+}
 </style>
 <div class="login-page">
 
@@ -300,5 +389,64 @@
     </div>
 
 </div>
+<!-- LOGOUT SUCCESS MODAL -->
 
+<div id="logoutSuccessModal" class="success-overlay">
+
+    <div class="success-modal">
+
+        <button class="success-close"
+                onclick="closeSuccessModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="success-icon">
+            <i class="fa-solid fa-shield-check"></i>
+        </div>
+
+        <h2>You have been logged out</h2>
+
+        <p>
+            Thank you for using TrackIt.com
+        </p>
+
+        <p>
+            See you again soon!
+        </p>
+
+        <button class="ok-btn"
+                onclick="closeSuccessModal()">
+            OK
+        </button>
+
+    </div>
+
+</div>
+<script>
+
+function closeSuccessModal(){
+
+    document.getElementById('logoutSuccessModal')
+            .style.display='none';
+
+    window.history.replaceState(
+        {},
+        document.title,
+        "/auth"
+    );
+}
+
+window.onload = function(){
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    if(params.get('logout') === 'success'){
+
+        document.getElementById('logoutSuccessModal')
+                .style.display='flex';
+    }
+}
+
+</script>
 @endsection

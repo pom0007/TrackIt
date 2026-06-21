@@ -266,6 +266,182 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             flex: 1;
             gap: 18px;
         }
+        /* MODAL */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.45);
+    backdrop-filter:blur(6px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+.logout-modal,
+.loading-modal{
+    width:430px;
+    background:#fff;
+    border-radius:24px;
+    padding:35px;
+    position:relative;
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.close-modal{
+    position:absolute;
+    right:18px;
+    top:18px;
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.logout-icon{
+    width:110px;
+    height:110px;
+    margin:auto;
+    border-radius:50%;
+    background:#ECFDF3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.logout-icon i{
+    font-size:48px;
+    color:#16A34A;
+}
+
+.logout-modal h2{
+    text-align:center;
+    margin-top:20px;
+}
+
+.logout-desc{
+    text-align:center;
+    margin-top:10px;
+    color:#64748B;
+}
+
+.logout-desc span{
+    color:#16A34A;
+    font-weight:600;
+}
+
+.logout-info{
+    margin-top:25px;
+    background:#F0FDF4;
+    border-radius:15px;
+    padding:15px;
+    display:flex;
+    gap:12px;
+}
+
+.logout-info i{
+    color:#16A34A;
+    font-size:22px;
+}
+
+.logout-info p{
+    color:#64748B;
+    font-size:14px;
+    margin-top:3px;
+}
+
+.logout-actions{
+    margin-top:25px;
+    display:flex;
+    gap:12px;
+}
+
+.cancel-btn,
+.confirm-btn{
+    flex:1;
+    height:50px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.cancel-btn{
+    background:#fff;
+    border:1px solid #D1D5DB;
+}
+
+.confirm-btn{
+    border:none;
+    background:#16A34A;
+    color:#fff;
+}
+
+/* LOADING */
+
+.spinner-circle{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:4px solid #DCFCE7;
+    border-top:4px solid #16A34A;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+.loading-modal h2{
+    text-align:center;
+    margin-top:20px;
+}
+
+.loading-modal p{
+    text-align:center;
+    color:#64748B;
+    margin-top:10px;
+}
+
+.loading-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
+
+.loading-dots span{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#16A34A;
+    animation:bounce 1s infinite;
+}
+
+.loading-dots span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.loading-dots span:nth-child(3){
+    animation-delay:.4s;
+}
+
+@keyframes bounce{
+    0%,100%{
+        opacity:.3;
+        transform:translateY(0);
+    }
+    50%{
+        opacity:1;
+        transform:translateY(-6px);
+    }
+}
 
 </style>
 
@@ -346,10 +522,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <span>Profile</span>
     </button>
 
-    <button>
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Logout</span>
-    </button>
+    <button onclick="openLogoutModal()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span>Logout</span>
+</button>
 
 </div>
     </div>
@@ -378,7 +554,106 @@ toggleBtn.addEventListener('click', () => {
 
 });
 
+function openLogoutModal(){
+    document.getElementById('logoutModal').style.display='flex';
+}
+
+function closeLogoutModal(){
+    document.getElementById('logoutModal').style.display='none';
+}
+
+function showLoadingModal(){
+
+    document.getElementById('logoutModal').style.display='none';
+
+    document.getElementById('loadingModal').style.display='flex';
+
+    setTimeout(() => {
+
+        window.location.href = "{{ url('/auth') }}?logout=success";
+
+    }, 2000);
+}
+
 </script>
 
+<!-- Logout Modal -->
+<div id="logoutModal" class="modal-overlay">
+
+    <div class="logout-modal">
+
+        <button class="close-modal" onclick="closeLogoutModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="logout-icon">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+
+        <h2>Ready to log out?</h2>
+
+        <p class="logout-desc">
+            Are you sure you want to log out of your
+            <span>TrackIt</span> account?
+        </p>
+
+        <div class="logout-info">
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <div>
+                <strong>Your session will be ended</strong>
+                <p>You'll need to log in again to access your account.</p>
+            </div>
+        </div>
+
+        <div class="logout-actions">
+
+            <button class="cancel-btn"
+                    onclick="closeLogoutModal()">
+                Cancel
+            </button>
+
+            <button class="confirm-btn"
+                    onclick="showLoadingModal()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Yes, Log out
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Loading Modal -->
+<div id="loadingModal" class="modal-overlay">
+
+    <div class="loading-modal">
+
+        <div class="spinner-circle">
+            <img src="{{ asset('images/TI.png') }}"
+                 width="70">
+        </div>
+
+        <h2>Logging you out...</h2>
+
+        <p>Please wait a moment.</p>
+
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+</div>
+
+<form id="logoutForm"
+      action="{{ route('logout') }}"
+      method="POST"
+      style="display:none;">
+    @csrf
+</form>
 </body>
 </html>
