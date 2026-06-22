@@ -613,7 +613,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     onclick="window.location.href='/garagesale'"
     class="{{ request()->is('garagesale') ? 'active' : '' }}">
     <i class="fa-solid fa-box"></i>
-    <span>Garage Sale</span>
+    <span>Garage</span>
 </button>
 
 <button

@@ -206,7 +206,7 @@
         <div class="properties-header">
 
             <div>
-                <h1>Garage Sale</h1>
+                <h1>Garage</h1>
                 <p>Manage all items on the garage.</p>
             </div>
 
